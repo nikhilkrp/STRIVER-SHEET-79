@@ -38,6 +38,35 @@ public:
                 }
             }
         }
+
+        // using stack
+
+        unordered_map<int, int> mpp1;
+        stack<int> st;
+
+        for (int i = m - 1; i >= 0; i--)
+        {
+            int A = nums2[i];
+
+            while (!st.empty() && st.top() <= A)
+            {
+                st.pop();
+            }
+            if (st.empty())
+            {
+                mpp1[A] = -1;
+            }
+            else
+            {
+                mpp1[A] = st.top();
+            }
+            st.push(A);
+        }
+
+        for (int i = 0; i < n; i++)
+        {
+            ans.push_back(mpp1[nums1[i]]);
+        }
         return ans;
     }
 };
